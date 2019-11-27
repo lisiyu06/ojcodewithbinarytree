@@ -10,6 +10,17 @@ package homework20;
     // s 的一个子树包括 s 的一个节点和这个节点的所有子孙。s 也可以看做它自身的一棵子树。
 
 public class IsSubtree {
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        public TreeNode(int val) {
+            this.val = val;
+        }
+    }
+
     public boolean isSubtree(TreeNode s, TreeNode t) {
         // 递归
         // 比较 s 是否包含 t
@@ -28,7 +39,7 @@ public class IsSubtree {
         //    比较一下 s 和 t 是不是相同的树，如果是相同的树，就认为是包含的
         boolean ret = false;
         if (s.val == t.val) {
-            ret = isSubtree(s, t);
+            ret = isSametree(s, t);
         }
         // b) 递归判定，t 是否被 s 的左子树包含
         if (!ret) {
@@ -39,5 +50,18 @@ public class IsSubtree {
             ret = isSubtree(s.right, t);
         }
         return ret;
+    }
+
+    public boolean isSametree(TreeNode p, TreeNode q) {
+        if (p == null && q == null) {
+            return true;
+        }
+        if (p == null || q == null) {
+            return false;
+        }
+        if (p.val != q.val) {
+            return false;
+        }
+        return isSametree(p.left, q.left) && isSametree(p.right, q.right);
     }
 }
