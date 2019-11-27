@@ -24,6 +24,20 @@ public class IsSubtree {
             return false;
         }
         // 3. 如果两个树都非空
-        // a) 比较
+        // a) 比较根节点的值是不是相等，如果相等的话，
+        //    比较一下 s 和 t 是不是相同的树，如果是相同的树，就认为是包含的
+        boolean ret = false;
+        if (s.val == t.val) {
+            ret = isSubtree(s, t);
+        }
+        // b) 递归判定，t 是否被 s 的左子树包含
+        if (!ret) {
+            ret = isSubtree(s.left, t);
+        }
+        // c) 递归判定，t 是否被 s 的右子树包含
+        if (!ret) {
+            ret = isSubtree(s.right, t);
+        }
+        return ret;
     }
 }
